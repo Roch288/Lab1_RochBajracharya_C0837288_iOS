@@ -29,6 +29,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WLe-Bl-ep9"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YmE-Xu-CwI">
                                                 <rect key="frame" x="126" y="0.0" width="121" height="121"/>
@@ -36,6 +39,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8kE-Y5-8Pb"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWO-5q-3i3">
                                                 <rect key="frame" x="252" y="0.0" width="121" height="121"/>
@@ -43,6 +49,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HU6-ub-od3"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -55,6 +64,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f50-ih-ZZw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p51-74-Yka">
                                                 <rect key="frame" x="126" y="0.0" width="121" height="121"/>
@@ -62,6 +74,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tgm-mB-4cE"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8es-kV-uKb">
                                                 <rect key="frame" x="252" y="0.0" width="121" height="121"/>
@@ -69,6 +84,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZHe-Ly-m52"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -81,6 +99,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ANz-KQ-4Dp"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="our-ot-naz">
                                                 <rect key="frame" x="126" y="0.0" width="121" height="121"/>
@@ -88,6 +109,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jCZ-dc-eWu"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8F-B5-UgL">
                                                 <rect key="frame" x="252" y="0.0" width="121" height="121"/>
@@ -95,6 +119,9 @@
                                                 <fontDescription key="fontDescription" name=".SFNS-Regular" family=".AppleSystemUIFont" pointSize="32"/>
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="tileClickHandler:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wsT-dd-c1O"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -203,6 +230,11 @@
                             <outletCollection property="gestureRecognizers" destination="Hkn-Lc-BZn" appends="YES" id="MuL-ZA-Muh"/>
                         </connections>
                     </view>
+                    <connections>
+                        <outlet property="crossScoreLabel" destination="eRu-pX-GL7" id="q9R-3D-nPi"/>
+                        <outlet property="noughtScoreLabel" destination="RwJ-Le-aAK" id="CQ3-fW-h6e"/>
+                        <outlet property="turnLabel" destination="fz5-H8-fGf" id="vMp-cg-JfW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="Hkn-Lc-BZn">
