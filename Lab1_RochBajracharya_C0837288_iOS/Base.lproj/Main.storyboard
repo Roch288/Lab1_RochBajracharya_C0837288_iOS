@@ -210,6 +210,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrQ-em-NAT">
+                                <rect key="frame" x="21" y="668" width="373" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" red="0.30402127000000001" green="0.62829193380000004" blue="0.21865804129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -232,6 +239,7 @@
                     </view>
                     <connections>
                         <outlet property="crossScoreLabel" destination="eRu-pX-GL7" id="q9R-3D-nPi"/>
+                        <outlet property="message" destination="PrQ-em-NAT" id="wYt-2q-DUK"/>
                         <outlet property="noughtScoreLabel" destination="RwJ-Le-aAK" id="CQ3-fW-h6e"/>
                         <outlet property="turnLabel" destination="fz5-H8-fGf" id="vMp-cg-JfW"/>
                     </connections>
