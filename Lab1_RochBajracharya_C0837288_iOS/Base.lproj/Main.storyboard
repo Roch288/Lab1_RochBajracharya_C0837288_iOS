@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -217,6 +218,13 @@
                                 <color key="textColor" red="0.30402127000000001" green="0.62829193380000004" blue="0.21865804129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe right to start a new game or tap on any box to continue the game" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pg-oB-lTK">
+                                <rect key="frame" x="21" y="730" width="373" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="AccentColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -241,13 +249,14 @@
                         <outlet property="crossScoreLabel" destination="eRu-pX-GL7" id="q9R-3D-nPi"/>
                         <outlet property="message" destination="PrQ-em-NAT" id="wYt-2q-DUK"/>
                         <outlet property="noughtScoreLabel" destination="RwJ-Le-aAK" id="CQ3-fW-h6e"/>
+                        <outlet property="swipeMessage" destination="4pg-oB-lTK" id="dsR-Nt-2nG"/>
                         <outlet property="turnLabel" destination="fz5-H8-fGf" id="vMp-cg-JfW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="Hkn-Lc-BZn">
                     <connections>
-                        <action selector="newGame:" destination="BYZ-38-t0r" id="FFq-tj-GmE"/>
+                        <action selector="newGame:" destination="BYZ-38-t0r" id="491-j8-ZjS"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
@@ -255,6 +264,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
