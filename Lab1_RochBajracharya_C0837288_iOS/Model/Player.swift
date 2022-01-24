@@ -52,7 +52,16 @@ class Player {
     
     // function to record move made by player
     func makeMove(position:Int){
+        print("make positons before", positons)
         self.positons.append(position)
+        print("make positons", positons)
+    }
+    
+    // function to undo last move made by player
+    func undoMove(){
+        print("undo positons before", self.positons)
+        self.positons.removeLast()
+        print("undo positons", self.positons)
     }
     
     // return win Messsage

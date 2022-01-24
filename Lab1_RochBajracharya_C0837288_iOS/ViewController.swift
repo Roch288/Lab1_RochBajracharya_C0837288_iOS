@@ -37,6 +37,28 @@ class ViewController: UIViewController {
         swipeMessage.isHidden = true
     }
     
+    // MARK: LAB TEST 2: Shake motion
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            // change turn back to previous player
+            turn = turn!.value == Type.Cross ? noughtPlayer : crossPlayer
+            turn?.undoMove()
+            
+            // remove image from last tapped button
+            clickedButtons.last?.setImage(nil, for: .normal)
+            clickedButtons.removeLast()
+            
+            // change turn label
+            turnLabel.text = turn!.inidicator
+        }
+    }
+    
     @IBAction func tileClickHandler(_ sender: UIButton) {
            
             // reset board if game is complete
