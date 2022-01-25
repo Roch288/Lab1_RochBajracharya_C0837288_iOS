@@ -61,7 +61,7 @@ extension Player {
     
     // return win Messsage
     func winMessage() -> String {
-        return "Congratulations! " + (value == "Cross" ? "Cross" : "Nought") + " is Winner";
+        return "Congratulations! " + (indicator == "x" ? "Cross" : "Nought") + " is Winner";
     }
     
     // reset Player

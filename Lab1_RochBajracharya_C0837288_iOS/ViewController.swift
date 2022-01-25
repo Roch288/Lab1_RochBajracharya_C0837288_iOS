@@ -58,13 +58,11 @@ class ViewController: UIViewController {
     // MARK: Core Data Methods
     func initPlayer() {
         crossPlayer = Player(context: context)
-        crossPlayer.value = "Cross"
-        crossPlayer.inidicator = "X"
+        crossPlayer.indicator = "X"
         crossPlayer.image = "cross"
         
         noughtPlayer = Player(context: context)
-        noughtPlayer.value = "Nought"
-        noughtPlayer.inidicator = "O"
+        noughtPlayer.indicator = "O"
         noughtPlayer.image = "nought"
         
         do {
@@ -83,12 +81,12 @@ class ViewController: UIViewController {
             if players.count == 0 {
                 initPlayer()
             } else {
-                crossPlayer = players.first(where: {$0.value == "Cross"})
-                noughtPlayer = players.first(where: {$0.value == "Nought"})
+                crossPlayer = players.first(where: {$0.indicator?.lowercased() == "x"})
+                noughtPlayer = players.first(where: {$0.indicator?.lowercased() == "o"})
                 
             }
             turn = crossPlayer
-            turnLabel.text = turn!.inidicator
+            turnLabel.text = turn!.indicator
             crossScoreLabel.text = String(crossPlayer!.score)
             noughtScoreLabel.text = String(noughtPlayer!.score)
             checkHasWin()
@@ -106,7 +104,7 @@ class ViewController: UIViewController {
         if motion == .motionShake && clickedButtons.count > 0 && !gameComplete && undoCount == 0  {
             undoCount += 1
             // change turn back to previous player
-            turn = turn!.value == "Cross" ? noughtPlayer : crossPlayer
+            turn = turn!.indicator?.lowercased() == "x" ? noughtPlayer : crossPlayer
             turn?.undoMove()
             
             // remove image from last tapped button
@@ -114,7 +112,7 @@ class ViewController: UIViewController {
             clickedButtons.removeLast()
             
             // change turn label
-            turnLabel.text = turn!.inidicator
+            turnLabel.text = turn!.indicator
         }
     }
     
@@ -154,7 +152,7 @@ class ViewController: UIViewController {
                 } catch {
                     print("Error saving player position \(error.localizedDescription)")
                 }
-                if turn!.value == "Cross" {
+                if turn!.indicator?.lowercased() == "x" {
                     crossScoreLabel.text = String(crossPlayer.score)
                 } else {
                     noughtScoreLabel.text = String(noughtPlayer.score)
@@ -166,8 +164,8 @@ class ViewController: UIViewController {
             }
             
             // toggle player turns
-            turn = turn!.value == "Cross" ? noughtPlayer : crossPlayer
-            turnLabel.text = turn!.inidicator
+            turn = turn!.indicator?.lowercased() == "x" ? noughtPlayer : crossPlayer
+            turnLabel.text = turn!.indicator
         }
         
     }
