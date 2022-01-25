@@ -30,6 +30,8 @@ class ViewController: UIViewController {
     // To inidicate if game is over
     var gameComplete = false
     
+    var undoCount = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +103,8 @@ class ViewController: UIViewController {
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake && !gameComplete {
+        if motion == .motionShake && clickedButtons.count > 0 && !gameComplete && undoCount == 0  {
+            undoCount += 1
             // change turn back to previous player
             turn = turn!.value == "Cross" ? noughtPlayer : crossPlayer
             turn?.undoMove()
@@ -124,6 +127,7 @@ class ViewController: UIViewController {
         
         // check if box is empty
         if sender.image(for: .normal) == nil && message.text == "" {
+            undoCount = 0
             
             // set image to cross or nought
             sender.setImage(UIImage(named: turn!.image!), for: .normal);
