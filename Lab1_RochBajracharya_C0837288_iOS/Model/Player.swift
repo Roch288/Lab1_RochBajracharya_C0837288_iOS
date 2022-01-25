@@ -6,35 +6,19 @@
 //
 
 import Foundation
-
-enum Type {
-case Cross
-case Nought
-}
+import UIKit
 
 var winningPositions = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
+let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-class Player {
-    var value: Type
-    var inidicator: String
-    var positons: [Int]
-    var score: Int
-    var image: String
-    
-    init(value:Type, inidicator:String, positions:[Int], score:Int,image: String){
-        self.value = value
-        self.inidicator = inidicator
-        self.positons = positions
-        self.score = score
-        self.image = image
-    }
+extension Player {
     
     // Win - 1, Loose - 0, Draw - -1
     func checkWin() -> Int {
         // check if player's positions are the winning positions
         for wp in winningPositions {
             let winningSet = Set(wp)
-            let playerSet = Set(self.positons)
+            let playerSet = Set(positons ?? [])
             let isWinner = winningSet.isSubset(of: playerSet)
             if isWinner {
                 return 1
@@ -42,7 +26,7 @@ class Player {
         }
         
         // check if player has already occupied more than 4 positions without winning and if yes, it's a draw
-        if self.positons.count > 4 {
+        if self.positons?.count ?? 0 > 4 {
             return -1
         }
         
@@ -52,26 +36,45 @@ class Player {
     
     // function to record move made by player
     func makeMove(position:Int){
-        print("make positons before", positons)
-        self.positons.append(position)
-        print("make positons", positons)
+        if positons == nil {
+            positons = [position]
+        } else {
+            positons?.append(position)
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving player position \(error.localizedDescription)")
+        }
     }
     
     // function to undo last move made by player
     func undoMove(){
-        print("undo positons before", self.positons)
-        self.positons.removeLast()
-        print("undo positons", self.positons)
+        positons?.removeLast()
+        do {
+            try context.save()
+        } catch {
+            print("Error saving player position \(error.localizedDescription)")
+        }
     }
     
     // return win Messsage
     func winMessage() -> String {
-        return "Congratulations! " + (self.value == Type.Cross ? "Cross" : "Nought") + " is Winner";
+        return "Congratulations! " + (value == "Cross" ? "Cross" : "Nought") + " is Winner";
     }
     
     // reset Player
     func resetPlayer(newGame:Bool){
-        self.positons.removeAll()
+        positons?.removeAll()
+        if newGame {
+            score = 0
+        }
+        do {
+            try context.save()
+        } catch {
+            print("Error saving player position \(error.localizedDescription)")
+        }
     }
     
 }

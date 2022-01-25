@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
     
@@ -14,10 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var turnLabel: UILabel!
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var swipeMessage: UILabel!
+    @IBOutlet weak var boardStack: UIStackView!
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     // Initializing players
-    var crossPlayer = Player(value: .Cross, inidicator: "X", positions: [], score: 0, image: "cross")
-    var noughtPlayer = Player(value: .Nought, inidicator: "O", positions: [], score: 0, image: "nought")
+    var crossPlayer: Player!
+    var noughtPlayer: Player!
     
     var turn:Player? = nil;
     
@@ -30,24 +34,76 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        turn = crossPlayer
-        turnLabel.text = turn!.inidicator
-        crossScoreLabel.text = String(turn!.score)
-        noughtScoreLabel.text = String(turn!.score)
         swipeMessage.isHidden = true
+        loadPlayer()
+        
+        // Get all buttons from stack view
+        for case let horizontalStackView as UIStackView in boardStack.arrangedSubviews {
+                    for case let button as UIButton in horizontalStackView.arrangedSubviews {
+                        // check if the position is filled by cross or nought
+                        let hasCross = crossPlayer.positons?.first(where: {$0 == button.tag}) != nil
+                        let hasNought = noughtPlayer.positons?.first(where: {$0 == button.tag}) != nil
+                        if hasCross || hasNought {
+                            clickedButtons.append(button)
+                            button.setImage(UIImage(named: (hasCross ? crossPlayer.image : noughtPlayer.image)!), for: .normal)
+                        }
+                    }
+                }
+        
+    }
+    
+    
+    // MARK: Core Data Methods
+    func initPlayer() {
+        crossPlayer = Player(context: context)
+        crossPlayer.value = "Cross"
+        crossPlayer.inidicator = "X"
+        crossPlayer.image = "cross"
+        
+        noughtPlayer = Player(context: context)
+        noughtPlayer.value = "Nought"
+        noughtPlayer.inidicator = "O"
+        noughtPlayer.image = "nought"
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving player \(error.localizedDescription)")
+        }
+        
+    }
+    
+    func loadPlayer() {
+        let request: NSFetchRequest<Player> = Player.fetchRequest()
+        
+        do {
+            let players = try context.fetch(request)
+            if players.count == 0 {
+                initPlayer()
+            } else {
+                crossPlayer = players.first(where: {$0.value == "Cross"})
+                noughtPlayer = players.first(where: {$0.value == "Nought"})
+                
+            }
+            turn = crossPlayer
+            turnLabel.text = turn!.inidicator
+            crossScoreLabel.text = String(crossPlayer!.score)
+            noughtScoreLabel.text = String(noughtPlayer!.score)
+            checkHasWin()
+        } catch {
+            print("Error loading players \(error.localizedDescription)")
+        }
     }
     
     // MARK: LAB TEST 2: Shake motion
     override var canBecomeFirstResponder: Bool {
-        get {
-            return true
-        }
+        return true
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
+        if motion == .motionShake && !gameComplete {
             // change turn back to previous player
-            turn = turn!.value == Type.Cross ? noughtPlayer : crossPlayer
+            turn = turn!.value == "Cross" ? noughtPlayer : crossPlayer
             turn?.undoMove()
             
             // remove image from last tapped button
@@ -60,50 +116,55 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tileClickHandler(_ sender: UIButton) {
-           
-            // reset board if game is complete
-            if gameComplete {
-                resetGame(isNewGame: false)
-            }
         
-            // check if box is empty
-            if sender.image(for: .normal) == nil && message.text == "" {
-               
-                // set image to cross or nought
-                sender.setImage(UIImage(named: turn!.image), for: .normal);
-                clickedButtons.append(sender) // store button to clear image when played again
-                
-                // For fade in Animation
-                sender.imageView?.alpha = 0
-                UIView.animate(withDuration: 1){
-                    sender.imageView?.alpha = 1
-                }
-                
-                // store position of player
-                turn!.makeMove(position: sender.tag)
-                
-                // check wheather any player has won
-                let playerWon = turn!.checkWin();
-                if playerWon == 1 {
-                    message.text = turn!.winMessage()
-                    swipeMessage.isHidden = false
-                    gameComplete = true
-                    turn!.score += 1
-                    if turn!.value == Type.Cross {
-                        crossScoreLabel.text = String(crossPlayer.score)
-                    } else {
-                        noughtScoreLabel.text = String(noughtPlayer.score)
-                    }
-                } else if playerWon == -1 {
-                    message.text = "It's a Draw"
-                    swipeMessage.isHidden = false
-                    gameComplete = true;
-                }
-                
-                // toggle player turns
-                turn = turn!.value == Type.Cross ? noughtPlayer : crossPlayer
-                turnLabel.text = turn!.inidicator
+        // reset board if game is complete
+        if gameComplete {
+            resetGame(isNewGame: false)
+        }
+        
+        // check if box is empty
+        if sender.image(for: .normal) == nil && message.text == "" {
+            
+            // set image to cross or nought
+            sender.setImage(UIImage(named: turn!.image!), for: .normal);
+            clickedButtons.append(sender) // store button to clear image when played again
+            
+            // For fade in Animation
+            sender.imageView?.alpha = 0
+            UIView.animate(withDuration: 1){
+                sender.imageView?.alpha = 1
             }
+            
+            // store position of player
+            turn!.makeMove(position: sender.tag)
+            
+            // check wheather any player has won
+            let playerWon = turn!.checkWin();
+            if playerWon == 1 {
+                message.text = turn!.winMessage()
+                swipeMessage.isHidden = false
+                gameComplete = true
+                turn!.score += 1
+                do {
+                    try context.save()
+                } catch {
+                    print("Error saving player position \(error.localizedDescription)")
+                }
+                if turn!.value == "Cross" {
+                    crossScoreLabel.text = String(crossPlayer.score)
+                } else {
+                    noughtScoreLabel.text = String(noughtPlayer.score)
+                }
+            } else if playerWon == -1 {
+                message.text = "It's a Draw"
+                swipeMessage.isHidden = false
+                gameComplete = true;
+            }
+            
+            // toggle player turns
+            turn = turn!.value == "Cross" ? noughtPlayer : crossPlayer
+            turnLabel.text = turn!.inidicator
+        }
         
     }
     
@@ -139,6 +200,21 @@ class ViewController: UIViewController {
         if isNewGame {
             crossScoreLabel.text = "0"
             noughtScoreLabel.text = "0"
+        }
+    }
+    
+    // check win when first data loaded
+    func checkHasWin(){
+        let crossWon = crossPlayer!.checkWin();
+        let noughtWon = noughtPlayer!.checkWin();
+        if crossWon == 1 || noughtWon == 1 {
+            message.text = crossWon == 1 ? crossPlayer!.winMessage() : noughtPlayer.winMessage()
+            swipeMessage.isHidden = false
+            gameComplete = true
+        } else if crossWon == -1 || noughtWon == -1 {
+            message.text = "It's a Draw"
+            swipeMessage.isHidden = false
+            gameComplete = true;
         }
     }
     

@@ -159,7 +159,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRu-pX-GL7">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRu-pX-GL7">
                                                         <rect key="frame" x="71.5" y="0.0" width="20" height="20.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="pDk-Ih-PKt"/>
@@ -179,7 +179,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Le-aAK">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwJ-Le-aAK">
                                                         <rect key="frame" x="71.5" y="0.0" width="20" height="20.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="EIG-dG-PJI"/>
@@ -246,6 +246,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="boardStack" destination="bpO-rv-Kvd" id="RXY-fQ-rPP"/>
                         <outlet property="crossScoreLabel" destination="eRu-pX-GL7" id="q9R-3D-nPi"/>
                         <outlet property="message" destination="PrQ-em-NAT" id="wYt-2q-DUK"/>
                         <outlet property="noughtScoreLabel" destination="RwJ-Le-aAK" id="CQ3-fW-h6e"/>
